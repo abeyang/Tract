@@ -1,0 +1,81 @@
+@import "bitters/bitters";
+@import "neat/neat";
+
+// VARIABLES
+// ==Box Model==
+$nav-width: 200px;
+$pad: 10px;
+$margin: 40px;
+
+html {
+  height: 100%;
+}
+
+body {
+  /*background: url(apple-touch-icon.png) no-repeat center center;*/
+}
+
+// NAVIGATION
+
+nav {
+	/*padding: $pad;*/
+}
+.nav {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: $nav-width;
+	background-color: $dark-purple;
+
+	header { padding-left: $pad*2; }
+
+	li {
+		padding: $pad/2 $pad*2;
+		border-left: 3px solid $dark-purple;
+
+		a { color: white; }
+
+		&.active {
+			border-left-color: $orange;
+			
+			a { color: $orange; }
+		}
+	}
+}
+
+// LAYOUT
+
+header {
+	padding-top: $pad/2;
+	padding-bottom: $pad/2;
+}
+
+section {
+	margin-left: $nav-width;
+	padding-left: $margin;
+	padding-right: $margin;
+}
+
+// MEDIA QUERIES
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  
+  /* Styles for mobile */
+
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
+  /* Styles for tablet */
+
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) {
+
+  /* Don't forget your Retina CSS! */
+  
+  body {
+    background-size: 72px 72px;
+  }
+
+}
