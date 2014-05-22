@@ -12,6 +12,9 @@ $base-font-size: 1em;
 $base-line-height: $base-font-size * 1.5;
 $base-border-radius: em(3);
 
+// --Added by Abe--
+$small-font-size: 0.8em;
+
 // Colors
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -23,14 +26,21 @@ $light-red: #FBE3E4;
 $light-yellow: #FFF6BF;
 $light-green: #E6EFC2;
 
-// --Modified by Abe--
+// --Added by Abe--
 $dark-purple: #1A0033;
 $purple: #BA00FF;
 $orange-red: #FF2D00;
 $orange: #FF5F00;
+$light-orange: lighten($orange, 10);
 $yellow: #FFCA00;
 $green: #18CC00;
 $blue: #0064FF;
+$lightest-blue: lighten($blue, 48);
+
+$lightest-gray: #eee;
+$off-black: #1b2224;
+$black: #222;
+$pitch-black: #050505;
 
 // Body Color
 $base-body-color: white;

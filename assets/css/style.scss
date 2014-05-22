@@ -3,7 +3,9 @@
 
 // VARIABLES
 // ==Box Model==
-$nav-width: 200px;
+$header-height: 60px;
+$nav-width: 80px;
+$subnav-width: 260px;
 $pad: 10px;
 $margin: 40px;
 
@@ -15,46 +17,119 @@ body {
   /*background: url(apple-touch-icon.png) no-repeat center center;*/
 }
 
-// NAVIGATION
+// LAYOUT
+///////////////////////////////////////////////////////////////////////////////
 
-nav {
-	/*padding: $pad;*/
-}
-.nav {
+.pane {
 	position: fixed;
 	top: 0;
+}
+.offset-header {
+	@extend .pane;
+	top: $header-height;
 	bottom: 0;
-	width: $nav-width;
-	background-color: $dark-purple;
+	overflow-y: scroll;
+}
 
-	header { padding-left: $pad*2; }
+header {
+	@extend .pane;
+	height: $header-height;
+	padding-top: $pad*2;
+	border-bottom: 1px solid $lightest-gray;
+}
+
+// Left Nav
+
+.nav {
+	@extend .pane;
+
+	header, ul {
+		width: $nav-width;
+		background-color: $off-black;
+	}
+
+	header { 
+		text-align: center; 
+		color: $medium-gray;
+		border-color: $pitch-black;
+	}
+
+	ul {
+		@extend .offset-header;
+
+		width: $nav-width;
+		background-color: $off-black;
+	}
 
 	li {
-		padding: $pad/2 $pad*2;
-		border-left: 3px solid $dark-purple;
+		padding: $pad*2 0;
+		margin-bottom: $pad*3;
+		text-align: center;
 
-		a { color: white; }
+		i { 
+			display: block;
+			margin-bottom: 3px;
+			font-size: 1.4em;
+		}
+
+		a { 
+			font-size: $small-font-size;
+			color: $medium-gray; 
+
+			&:hover { color: white; }
+		}
 
 		&.active {
-			border-left-color: $orange;
+			background-color: $light-orange;			
 			
-			a { color: $orange; }
+			a { color: white; }
 		}
 	}
 }
 
-// LAYOUT
+// Mid Nav
 
-header {
-	padding-top: $pad/2;
-	padding-bottom: $pad/2;
+.mid-tier {
+	@extend .pane;
+	left: $nav-width;
+
+	header, .subnav {
+		width: $subnav-width;
+		padding-left: $pad;
+		padding-right: $pad;
+		background-color: $lightest-blue;
+	}
+
+	/*header { border-color: $black; }*/
+
+	.subnav {
+		@extend .offset-header;
+		padding-top: $pad*2;
+	}
 }
 
-section {
-	margin-left: $nav-width;
-	padding-left: $margin;
-	padding-right: $margin;
+// Main Content
+
+.main {
+	@extend .pane;
+	left: $nav-width + $subnav-width;
+
+	header, section {
+		padding-left: $pad*2;
+		padding-right: $pad*2;
+	}
+
+	header {
+		left: $nav-width + $subnav-width;
+		right: 0;
+	}
+
+	section {
+		@extend .offset-header;
+		padding-top: $pad*2;
+	}
 }
+
 
 // MEDIA QUERIES
 
