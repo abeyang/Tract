@@ -1,9 +1,13 @@
-<aside class="mid-tier">
+<!-- @todo account for 0 contacts -->
+
+<aside class="mid-tier alt">
 	<header>
-		{{ text }}
+		All Contacts
 	</header>
 	<nav class="subnav">
-		lorem ipsum
+		<div ng-repeat="contact in contacts">
+			<a href="{{ ui.linkContact(contact.id) }}">{{ contact.name }}</a>
+		</div>
 	</nav>
 </aside>
 
@@ -12,6 +16,6 @@
 		header
 	</header>
 	<section>
-		This is the main section
+		{{ contacts }}
 	</section>
 </div>
