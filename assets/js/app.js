@@ -21,15 +21,6 @@ var app = angular.module('app', ['ngSanitize', 'ui.router']);
 
 // ROUTERS
 
-/* app.config(['$routeProvider', function($routeProvider) {
-  $routeProvider
-      .when('/', {templateUrl: 'includes/dashboard.html', controller: 'DashboardController'})
-	  .when('/contacts', {templateUrl: 'includes/contacts.html', controller: 'ContactsController'})
-      .when('/contacts/:cid', {templateUrl: 'includes/contacts.html', controller: 'ContactsController'})
-	  .when('/notes', {templateUrl: 'includes/notes.html', controller: 'NotesController'})
-      .otherwise({redirectTo: '/'});
-}]);*/
-
 app.config(function($stateProvider, $urlRouterProvider) {
 
 	// For any unmatched url, redirect to /
@@ -46,6 +37,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		})
 
 		// Contacts
+		// @todo try multiple views
+		// https://github.com/angular-ui/ui-router#multiple--named-views
+		// check to see if multiple views reload _all_ views
 		.state('contacts', {
 			url: '/contacts',
 			templateUrl: 'includes/contacts.html',
@@ -116,7 +110,7 @@ app.controller('ContactNotesController', function($scope, $stateParams, $state, 
 	ui.setContact(cid);
 	
 	$scope.notes = noteResource.filterByContactId(cid);
-
+	$scope.p = $stateParams;
 });
 
 
