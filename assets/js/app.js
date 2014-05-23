@@ -17,18 +17,60 @@ Created by Abe Yang 5/21/2014
 
 'use strict';
 
-var app = angular.module('app', ['ngSanitize', 'ui.router', 'ngRoute']);
+var app = angular.module('app', ['ngSanitize', 'ui.router']);
 
 // ROUTERS
 
- app.config(['$routeProvider', function($routeProvider) {
+/* app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
       .when('/', {templateUrl: 'includes/dashboard.html', controller: 'DashboardController'})
 	  .when('/contacts', {templateUrl: 'includes/contacts.html', controller: 'ContactsController'})
       .when('/contacts/:cid', {templateUrl: 'includes/contacts.html', controller: 'ContactsController'})
 	  .when('/notes', {templateUrl: 'includes/notes.html', controller: 'NotesController'})
       .otherwise({redirectTo: '/'});
-}]);
+}]);*/
+
+app.config(function($stateProvider, $urlRouterProvider) {
+
+	// For any unmatched url, redirect to /
+	$urlRouterProvider.otherwise("/");
+	
+	// States
+	$stateProvider
+		.state('dashboard', {
+			url: '/',
+			templateUrl: 'includes/dashboard.html',
+			controller: 'DashboardController'
+		})
+		.state('contacts', {
+			url: '/contacts',
+			templateUrl: 'includes/contacts.html',
+			controller: 'ContactsController'
+		})
+		.state('notes', {
+			url: '/notes',
+			templateUrl: 'includes/notes.html',
+			controller: 'NotesController'
+		})
+/*	 .state('state1.list', {
+	   url: "/list",
+	   templateUrl: "includes/state1.list.html",
+	   controller: function($scope) {
+	     $scope.items = ["A", "List", "Of", "Items"];
+	   }
+	 })
+	 .state('state2', {
+	   url: "/state2",
+	   templateUrl: "includes/state2.html"
+	 })
+	 .state('state2.list', {
+	   url: "/list",
+	     templateUrl: "includes/state2.list.html",
+	     controller: function($scope) {
+	       $scope.things = ["A", "Set", "Of", "Things"];
+	     }
+	   })*/
+});
 
 // CONTROLLERS
 
