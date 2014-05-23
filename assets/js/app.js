@@ -33,20 +33,31 @@ var app = angular.module('app', ['ngSanitize', 'ui.router']);
 app.config(function($stateProvider, $urlRouterProvider) {
 
 	// For any unmatched url, redirect to /
-	$urlRouterProvider.otherwise("/");
+	$urlRouterProvider.otherwise("dashboard");
 	
 	// States
 	$stateProvider
+
+		// Dashboard
 		.state('dashboard', {
-			url: '/',
+			url: '/dashboard',
 			templateUrl: 'includes/dashboard.html',
 			controller: 'DashboardController'
 		})
+
+		// Contacts
 		.state('contacts', {
 			url: '/contacts',
 			templateUrl: 'includes/contacts.html',
 			controller: 'ContactsController'
 		})
+		.state('contacts.notes', {
+			url: '/:cid',
+			templateUrl: 'includes/contacts.notes.html',
+			controller: 'ContactNotesController'
+		})
+
+		// Notes
 		.state('notes', {
 			url: '/notes',
 			templateUrl: 'includes/notes.html',
@@ -84,15 +95,30 @@ app.controller('DashboardController', function($scope, ui) {
 
 });
 
-app.controller('ContactsController', function($scope, ui, contactResource, noteResource) {
+app.controller('ContactsController', function($scope, $stateParams, $state, ui, contactResource) {
 
 	$scope.ui = ui;
 	ui.setContext('contacts');
 	
 	$scope.contacts = contactResource.list();
-	// todo...
+	$scope.p = $stateParams;
+	
+	// @todo check if contacts.count > 0, and if so, find its first id 
+	// (id doesn't have to be 0)
+	
+	// if (_.isEmpty($stateParams)) $state.go('contacts.notes', {cid: 0});
 
 });
+
+app.controller('ContactNotesController', function($scope, $stateParams, $state, ui, noteResource) {
+
+	var cid = $stateParams.cid;
+	ui.setContact(cid);
+	
+	$scope.notes = noteResource.filterByContactId(cid);
+
+});
+
 
 app.controller('NotesController', function($scope, ui) {
 
@@ -101,6 +127,7 @@ app.controller('NotesController', function($scope, ui) {
 	
 	$scope.text = 'Notes Controller';
 	// todo...
+
 
 });
 
@@ -159,6 +186,7 @@ app.controller('NotesController', function($scope, ui) {
 
 app.factory('ui', function() {
 	var context = 'dashboard';
+	var contact = '';
 
 	return {
 		link: function(str) {
@@ -172,6 +200,17 @@ app.factory('ui', function() {
         },
         setContext: function(str) { 
         	context = str; 
+        },
+        getContact: function() { 
+        	return contact; 
+        },
+        setContact: function(str) { 
+        	contact = str; 
+        },
+        findById: function(resource, id) {
+        	return _.find(resource.list(), function(obj) {
+                return obj.id == id;
+            });
         }
 	}
 });

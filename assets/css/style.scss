@@ -54,7 +54,7 @@ header {
 		border-color: $pitch-black;
 	}
 
-	ul {
+	ul.top {
 		@extend .offset-header;
 
 		width: $nav-width;
@@ -70,7 +70,7 @@ header {
 
 		a { 
 			display: block;
-			padding: $pad*2 0;
+			padding: $pad*1.5 0;
 			text-align: center;
 			font-size: $small-font-size;
 			color: $medium-gray; 
@@ -79,9 +79,14 @@ header {
 		}
 
 		&.active a {
-			color: white;
-			background-color: $light-orange;			
+			color: $light-orange;
+			/*background-color: $light-orange;			*/
 		}
+	}
+
+	ul.bottom {
+		position: absolute;
+		bottom: 0;
 	}
 }
 
@@ -111,6 +116,12 @@ header {
 			background-color: $dark-gray;
 			border-color: $black;
 		}
+
+		a { 
+			color: $medium-gray;
+
+			&.active { color: white; }
+		}
 	}
 }
 
@@ -134,6 +145,10 @@ header {
 		@extend .offset-header;
 		padding-top: $pad*2;
 	}
+}
+
+article {
+	margin-bottom: $margin;
 }
 
 

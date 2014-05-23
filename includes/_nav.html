@@ -2,11 +2,21 @@
 	<header>
 		Tract
 	</header>
-	<ul>
+	<ul class="top">
 		<!-- http://colebemis.com/feather/ -->
-		<li ng-class="{active: ui.getContext() == 'dashboard'}"><a ui-sref="/"><i class="icon-monitor"></i>Dashboard</a></li>
+		<li ng-class="{active: ui.getContext() == 'dashboard'}"><a ui-sref="dashboard"><i class="icon-monitor"></i>Dashboard</a></li>
 		<li ng-class="{active: ui.getContext() == 'contacts'}"><a ui-sref="contacts"><i class="icon-head"></i>Contacts</a></li>
-		<li ng-class="{active: ui.getContext() == 'entries'}"><a ui-sref="notes"><i class="icon-paper"></i>Notes</a></li>
-		<li><a href="#"><i class="icon-layout"></i>Calendar</a></li>
+		<li ng-class="{active: ui.getContext() == 'notes'}"><a ui-sref="notes"><i class="icon-paper"></i>Notes</a></li>
+		<li><a href="#"><i class="icon-tag"></i>Tags</a></li>
+
+		<li>
+			<ul class="bottom">
+				<li><a href="#"><i class="icon-search"></i>Search</a></li>
+				<li><a href="#"><i class="icon-cog"></i>Settings</a></li>
+				<li><a href="#"><i class="icon-plus"></i>Add</a></li> 
+				<!-- @todo use the 'plus/contact' icon -->
+				<!-- @todo make 'add contact' into colorful button -->
+			</ul>
+		</li>
 	</ul>
 </nav>
