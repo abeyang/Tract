@@ -3,8 +3,10 @@ Created by Abe Yang 5/21/2014
 
 	Legend:
 	+ cid = contact id
+	+ nid = note id
 	+ gid = group id
 	+ tid = tag id
+
 */
 
 // =========================================================================================================
@@ -15,7 +17,7 @@ Created by Abe Yang 5/21/2014
 
 'use strict';
 
-var app = angular.module('app', ['ngSanitize', 'ngRoute']);
+var app = angular.module('app', ['ngSanitize', 'ui.router', 'ngRoute']);
 
 // ROUTERS
 
@@ -24,7 +26,7 @@ var app = angular.module('app', ['ngSanitize', 'ngRoute']);
       .when('/', {templateUrl: 'includes/dashboard.html', controller: 'DashboardController'})
 	  .when('/contacts', {templateUrl: 'includes/contacts.html', controller: 'ContactsController'})
       .when('/contacts/:cid', {templateUrl: 'includes/contacts.html', controller: 'ContactsController'})
-	  .when('/entries', {templateUrl: 'includes/entries.html', controller: 'EntriesController'})
+	  .when('/notes', {templateUrl: 'includes/notes.html', controller: 'NotesController'})
       .otherwise({redirectTo: '/'});
 }]);
 
@@ -40,7 +42,7 @@ app.controller('DashboardController', function($scope, ui) {
 
 });
 
-app.controller('ContactsController', function($scope, ui, contactResource, entryResource) {
+app.controller('ContactsController', function($scope, ui, contactResource, noteResource) {
 
 	$scope.ui = ui;
 	ui.setContext('contacts');
@@ -50,12 +52,12 @@ app.controller('ContactsController', function($scope, ui, contactResource, entry
 
 });
 
-app.controller('EntriesController', function($scope, ui) {
+app.controller('NotesController', function($scope, ui) {
 
 	$scope.ui = ui;
-	ui.setContext('entries');
+	ui.setContext('notes');
 	
-	$scope.text = 'Entries Controller';
+	$scope.text = 'Notes Controller';
 	// todo...
 
 });
@@ -241,7 +243,7 @@ app.factory('contactResource', function() {
 	}
 });
 
-app.factory('entryResource', function() {
+app.factory('noteResource', function() {
 	/*  currently uses dummy data: 
 		http://www.json-generator.com/
 		
@@ -501,13 +503,13 @@ app.factory('entryResource', function() {
 			return data;
 		},
 		findById: function(id) {
-            return _.find(data, function(e) {
-                return e.id == id;
+            return _.find(data, function(n) {
+                return n.id == id;
             });
         },
         filterByContactId: function(cid) {
-			return _.filter(data, function(e) {
-        		return e.cid == cid;
+			return _.filter(data, function(n) {
+        		return n.cid == cid;
         	});
         },
 	}
